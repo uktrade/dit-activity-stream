@@ -6,33 +6,40 @@ from django.views import View
 
 
 # We want this function to return a View
-def get_activity_stream_view() -> View:
+def get_activity_stream_client():
     """
-    Get the view from the RENDER_VIEW setting
+    Get the view from the DIT_ACTIVITY_STREAM_CLIENT_CLASS setting
     """
 
     # Use default view if RENDER_VIEW setting doesn't exist.
-    if not getattr(settings, "RENDER_VIEW", None):
-        return DitActivityStreamView.as_view()
+    if not getattr(settings, "DIT_ACTIVITY_STREAM_CLIENT_CLASS", None):
+        return ActivityStreamClient()
 
-    render_view_class = import_string(settings.RENDER_VIEW)
+    dit_activity_stream_client_class = import_string(settings.DIT_ACTIVITY_STREAM_CLIENT_CLASS)
 
     # Check if subclass of View
-    if not issubclass(render_view_class, View):
-        raise ValueError("RENDER_VIEW must inherit from View")
+    if not issubclass(dit_activity_stream_client_class, ActivityStreamClient):
+        raise ValueError("DIT_ACTIVITY_STREAM_CLIENT_CLASS must inherit from ActivityStreamClient")
 
-    return render_view_class.as_view()
+    return dit_activity_stream_client_class()
 
 
 class DitActivityStreamView(View):
 
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+        self.client = get_activity_stream_client()
+
     def get(self, request, *args, **kwargs):
         data = {}
-        users = self.get_queryset()
+        users = self.client.get_queryset()
         data["users"] = []
         for user in users:
-            data["users"].append(self.render_object(user))
+            data["users"].append(self.client.render_object(user))
         return JsonResponse(data)
+
+
+class ActivityStreamClient:
 
     def get_queryset(self):
         return User.objects.all()
