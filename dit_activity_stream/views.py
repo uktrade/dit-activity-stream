@@ -35,23 +35,22 @@ class DitActivityStreamView(View):
         self.client = get_activity_stream_client()
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.authenticated(request):
+        if not self.authenticate(request):
             return self.forbidden()
 
-        super().dispatch(self, request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-
         # Get the data
         data = {}
         users = self.client.get_queryset()
         data["users"] = []
         for user in users:
             data["users"].append(self.client.render_object(user))
+
         return JsonResponse(data)
 
-    def authenticated(self, request):
-
+    def authenticate(self, request):
         # Ensure not being accessed via public networking
         via_public_internet = "x-forwarded-for" in request.headers
         if via_public_internet:
@@ -93,8 +92,8 @@ class DitActivityStreamView(View):
 
     def lookup_credentials(self, passed_id):
         user = {
-            "id": settings.ACTIVITY_STREAM_HAWK_ID,
-            "key": settings.ACTIVITY_STREAM_HAWK_SECRET,
+            "id": settings.ACTIVITY_STREAM_HAWK_CREDENTIALS["id"],
+            "key": settings.ACTIVITY_STREAM_HAWK_CREDENTIALS["key"],
         }
         return user if hmac.compare_digest(passed_id, user["id"]) else None
 
