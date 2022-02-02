@@ -21,7 +21,7 @@ def get_activity_stream_client():
 
     dit_activity_stream_client_class = import_string(settings.DIT_ACTIVITY_STREAM_CLIENT_CLASS)
 
-    # Check if subclass of View
+    # Check if subclass of ActivityStreamClient
     if not issubclass(dit_activity_stream_client_class, ActivityStreamClient):
         raise ValueError("DIT_ACTIVITY_STREAM_CLIENT_CLASS must inherit from ActivityStreamClient")
 
@@ -41,20 +41,12 @@ class DitActivityStreamView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        # Get the data
-        data = {}
-        users = self.client.get_queryset()
-        data["users"] = []
-        for user in users:
-            data["users"].append(self.client.render_object(user))
-
-        return JsonResponse(data)
+        return self.client.render_page(request)
 
     def authenticate(self, request):
         # Ensure not being accessed via public networking
         via_public_internet = "x-forwarded-for" in request.headers
         if via_public_internet:
-          # TODO: Decide if to: return self.forbidden() OR the following line - same questions for ocode below???
             return False
 
         # Ensure signed with Hawk
@@ -105,10 +97,23 @@ class DitActivityStreamView(View):
 
 class ActivityStreamClient:
 
-    def get_queryset(self):
+    data_key = 'users'
+
+    def get_queryset(self, request):
         return User.objects.all()
 
     def render_object(self, user):
         return {
             "Name": user.username,
         }
+
+    def render_page(self, request):
+        # Get the data
+        data = {}
+        users = self.get_queryset(request)
+        
+        data[self.data_key] = []
+        for user in users:
+            data[self.data_key].append(self.render_object(user))
+
+        return JsonResponse(data)
