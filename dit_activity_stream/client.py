@@ -32,10 +32,6 @@ def get_activity_stream_client():
 
 class ActivityStreamClient(ABC):
     @abstractmethod
-    def get_data_key(self) -> str:
-        raise NotImplementedError()
-
-    @abstractmethod
     def get_queryset(self, request: HttpRequest) -> QuerySet:
         raise NotImplementedError()
 
@@ -44,16 +40,21 @@ class ActivityStreamClient(ABC):
         raise NotImplementedError()
 
     def render_page(self, request: HttpRequest) -> JsonResponse:
+        # TODO: Add pagination
         objects = self.get_queryset(request)
 
-        object_data = []
+        data = {
+            "@context": [
+                "https://www.w3.org/ns/activitystreams",
+                {"dit": "https://www.trade.gov.uk/ns/activitystreams/v1"},
+            ],
+            "type": "Collection",
+            "orderedItems": [],
+        }
+
         for object in objects:
-            object_data[self.get_data_key()].append(
+            data["orderedItems"].append(
                 self.render_object(object=object),
             )
 
-        return JsonResponse(
-            {
-                self.data_key: object_data,
-            }
-        )
+        return JsonResponse(data)
