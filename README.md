@@ -15,9 +15,6 @@ from dit_acivity_stream.client import ActivityStreamClient
 
 
 class ActivityStreamUserClient(ActivityStreamClient):
-    def get_data_key(self) -> str:
-        return "users"
-
     def get_queryset(self, request: HttpRequest) -> QuerySet:
         return User.objects.all()
 
