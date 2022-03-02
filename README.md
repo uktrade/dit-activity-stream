@@ -1,9 +1,25 @@
 # DIT Activity Stream
 
+## Installation
+
+Read the [Django Hawk installation](https://github.com/uktrade/django-hawk/#installation) documentation.
+
+Add the package to your `urls.py` file.
+
+```python
+from django.urls import include, path
+
+urlpatterns = [
+    ...
+    path("dit-activity-stream/", include("dit_activity_stream.urls")),
+    ...
+]
+```
 
 ## How to implement?
 
-Example Client for returning all users:
+Write your custom client, here is an example client for returning all users:
+
 ```python
 from typing import Any, Dict
 
@@ -11,7 +27,7 @@ from django.contrib.auth.models import User
 from django.db.models import QuerySet
 from django.http import HttpRequest
 
-from dit_acivity_stream.client import ActivityStreamClient
+from dit_activity_stream.client import ActivityStreamClient
 
 
 class ActivityStreamUserClient(ActivityStreamClient):

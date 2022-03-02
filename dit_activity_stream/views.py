@@ -1,6 +1,8 @@
-from django.conf import settings
 from django.http import JsonResponse
+from django.utils.decorators import decorator_from_middleware
 from django.views import View
+from django_hawk.middleware import HawkResponseMiddleware
+from django_hawk.utils import DjangoHawkAuthenticationFailed, authenticate_request
 
 from dit_activity_stream.client import get_activity_stream_client
 
@@ -10,6 +12,7 @@ class DitActivityStreamView(View):
         super().__init__(**kwargs)
         self.client = get_activity_stream_client()
 
+    @decorator_from_middleware(HawkResponseMiddleware)
     def dispatch(self, request, *args, **kwargs):
         if not self.authenticate(request):
             return self.forbidden()
@@ -25,7 +28,11 @@ class DitActivityStreamView(View):
         if via_public_internet:
             return False
 
-        # TODO: Use Django-Hawk to authenticate
+        # Try to authenticate with Django Hawk
+        try:
+            authenticate_request(request=request)
+        except DjangoHawkAuthenticationFailed:
+            return False
 
         return True
 

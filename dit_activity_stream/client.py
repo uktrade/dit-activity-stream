@@ -43,7 +43,7 @@ class ActivityStreamClient(ABC):
         # TODO: Add pagination
         objects = self.get_queryset(request)
 
-        data = {
+        data: Dict[str, Any] = {
             "@context": [
                 "https://www.w3.org/ns/activitystreams",
                 {"dit": "https://www.trade.gov.uk/ns/activitystreams/v1"},
