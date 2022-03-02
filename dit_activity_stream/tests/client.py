@@ -7,6 +7,10 @@ from django.http import HttpRequest
 from dit_activity_stream.client import ActivityStreamClient
 
 
+class TestBadActivityStreamClient:
+    pass
+
+
 class TestActivityStreamClient(ActivityStreamClient):
     def get_queryset(self, request: HttpRequest) -> QuerySet:
         return User.objects.all()

@@ -15,7 +15,7 @@ def get_activity_stream_client():
 
     # Use default view if RENDER_VIEW setting doesn't exist.
     if not getattr(settings, "DIT_ACTIVITY_STREAM_CLIENT_CLASS", None):
-        return ActivityStreamClient()
+        raise ValueError("DIT_ACTIVITY_STREAM_CLIENT_CLASS must be set")
 
     dit_activity_stream_client_class = import_string(
         settings.DIT_ACTIVITY_STREAM_CLIENT_CLASS
@@ -33,11 +33,11 @@ def get_activity_stream_client():
 class ActivityStreamClient(ABC):
     @abstractmethod
     def get_queryset(self, request: HttpRequest) -> QuerySet:
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     @abstractmethod
     def render_object(self, object: Any) -> Dict:
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
     def render_page(self, request: HttpRequest) -> JsonResponse:
         # TODO: Add pagination
