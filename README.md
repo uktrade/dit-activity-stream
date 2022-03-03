@@ -23,14 +23,19 @@ Write your custom client, here is an example client for returning all users:
 ```python
 from typing import Any, Dict
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db.models import QuerySet
 from django.http import HttpRequest
 
 from dit_activity_stream.client import ActivityStreamClient
 
+User = get_user_model()
+
 
 class ActivityStreamUserClient(ActivityStreamClient):
+    object_uuid_field: str = "user_id"
+    object_last_modified_field: str = "last_modified"
+
     def get_queryset(self, request: HttpRequest) -> QuerySet:
         return User.objects.all()
 
@@ -42,6 +47,12 @@ class ActivityStreamUserClient(ActivityStreamClient):
             "last_name": object.last_name,
         }
 ```
+
+Where the following attributes:
+- `object_uuid_field` is a field on the Object that is a Unique Identifier for the object.
+  - This will be output in the URL GET parameter so it should be a UUID.
+- `object_last_modified_field` us a field on the Object that holds a datetime value of when the object was last modified.
+  - This will be output in the URL GET parameter.
 
 Set `DIT_ACTIVITY_STREAM_CLIENT_CLASS` in your django settings file:
 

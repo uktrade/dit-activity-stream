@@ -1,5 +1,6 @@
 include LICENSE *.rst *.txt *.md
 graft dit_activity_stream
+prune dit_activity_stream/test_app
 prune dit_activity_stream/tests
 global-include *.typed
 global-exclude __pycache__

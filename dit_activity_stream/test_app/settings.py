@@ -11,6 +11,8 @@ SECRET_KEY = django.utils.crypto.get_random_string(50)
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "dit_activity_stream",
+    "dit_activity_stream.test_app.apps.TestAppConfig",
 ]
 
 TEMPLATES = [
@@ -34,11 +36,13 @@ MEDIA_ROOT = os.path.join(TESTS_PATH, "media")
 
 STATIC_ROOT = os.path.join(TESTS_PATH, "static")
 
-ROOT_URLCONF = "dit_activity_stream.tests.urls"
+ROOT_URLCONF = "dit_activity_stream.test_app.urls"
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
 ]
+
+AUTH_USER_MODEL = "dit_activity_stream_test_app.CustomUser"
 
 # Django HAWK settings
 DJANGO_HAWK = {
@@ -48,5 +52,5 @@ DJANGO_HAWK = {
 
 # DIT Activity Stream settings
 DIT_ACTIVITY_STREAM_CLIENT_CLASS = (
-    "dit_activity_stream.tests.client.TestActivityStreamClient"
+    "dit_activity_stream.test_app.client.TestActivityStreamClient"
 )
