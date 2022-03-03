@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import TYPE_CHECKING, Dict
 
 from django.contrib.auth import get_user_model
 from django.db.models import QuerySet
@@ -6,7 +6,12 @@ from django.http import HttpRequest
 
 from dit_activity_stream.client import ActivityStreamClient
 
-User = get_user_model()
+if TYPE_CHECKING:
+    from dit_activity_stream.test_app.models import (
+        CustomUser as User,  # pragma: no cover
+    )
+else:
+    User = get_user_model()
 
 
 class TestBadActivityStreamClient:
@@ -20,7 +25,7 @@ class TestActivityStreamClient(ActivityStreamClient):
     def get_queryset(self, request: HttpRequest) -> QuerySet:
         return User.objects.all()
 
-    def render_object(self, object: User) -> Dict:
+    def render_object(self, object: "User") -> Dict:
         return {
             "Name": object.username,
         }

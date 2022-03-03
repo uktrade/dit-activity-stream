@@ -1,11 +1,10 @@
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from uuid import UUID
 
 from django.conf import settings
-from django.db.models import F, Func, Q, QuerySet, TextField, Value
-from django.db.models.functions import Concat
+from django.db.models import Q, QuerySet
 from django.http import HttpRequest, JsonResponse
 from django.urls import reverse
 from django.utils.module_loading import import_string
@@ -139,19 +138,22 @@ class ActivityStreamClient(ABC):
             "orderedItems": [],
         }
 
-        after_ts = None
-        after_object_id = None
+        last_ts: Optional[datetime] = None
+        last_object_id: Optional[UUID] = None
 
         for object in objects:
             data["orderedItems"].append(self.render_object(object=object))
-            after_ts = getattr(object, self.object_last_modified_field)
-            after_object_id = getattr(object, self.object_uuid_field)
+            last_ts = getattr(object, self.object_last_modified_field)
+            last_object_id = getattr(object, self.object_uuid_field)
 
         if data["orderedItems"]:
+            assert last_ts
+            assert last_object_id
+
             data["next"] = self.next_url(
                 request=request,
-                after_ts=after_ts,
-                after_object_id=after_object_id,
+                after_ts=last_ts,
+                after_object_id=last_object_id,
             )
 
         return JsonResponse(data)
