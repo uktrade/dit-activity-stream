@@ -65,6 +65,8 @@ DIT_ACTIVITY_STREAM_CLIENT_CLASS = "package.client.ActivityStreamUserClient"
 - [PyPI Package](https://pypi.org/project/dit-activity-stream/)
 - [Test PyPI Package](https://test.pypi.org/project/dit-activity-stream/)
 
-Running `make build` will build the package into the `dist/` directory
-Running `make push-pypi-test` will push the built package to Test PyPI
-Running `make push-pypi` will push the built package to PyPI
+Running `make build` will build the package into the `dist/` directory.
+
+Running `make push-pypi-test` will push the built package to Test PyPI.
+
+Running `make push-pypi` will push the built package to PyPI.
