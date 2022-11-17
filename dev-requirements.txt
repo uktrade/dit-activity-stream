@@ -1,7 +1,7 @@
 # Package dependancies
 Django>=2.2, <4.1
 hawk-server==0.0.12
-django-hawk==0.0.2
+django-hawk>=1.1, <2.0
 
 # Testing
 tox
