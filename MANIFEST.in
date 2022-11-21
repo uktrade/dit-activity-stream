@@ -6,4 +6,3 @@ global-include *.typed
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude .DS_Store
-global-exclude dev-requirements.txt

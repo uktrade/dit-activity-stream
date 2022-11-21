@@ -4,3 +4,42 @@ requires = [
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
+
+[tool.poetry]
+name = "dit-activity-steam"
+version = "0.1.0"
+description = "DIT Activity Stream"
+authors = [
+    "Cameron Lamb <live.services@digital.trade.gov.uk>"
+]
+license = "MIT"
+readme = "README.md"
+keywords = [
+    "django"
+]
+homepage = "https://github.com/uktrade/dit-activity-stream"
+
+
+[tool.poetry.dependencies]
+python = "^3.6.3"
+Django = ">=2.2, <4.2"
+django-hawk = "^1.1.1"
+
+[tool.poetry.group.testing]
+optional = true
+
+[tool.poetry.group.testing.dependencies]
+tox = "*"
+freezegun = "*"
+coverage = "*"
+
+[tool.poetry.group.utils]
+optional = true
+
+[tool.poetry.group.utils.dependencies]
+isort = "*"
+flake8 = "*"
+black = "*"
+mypy = "*"
+django-stubs = "*"
+types-freezegun = "*"
