@@ -9,26 +9,30 @@ COLOUR_RED='\033[0;31m'
 # Help output
 .PHONY: help test
 help:
+	@echo -e "$(COLOUR_YELLOW)make setup$(COLOUR_NONE) : Initalise the poetry environment"
 	@echo -e "$(COLOUR_YELLOW)make cleanup-code$(COLOUR_NONE) : Run flake8, black, isort, mypy"
-	@echo -e "$(COLOUR_YELLOW)make tests$(COLOUR_NONE) : Run tests"
-	@echo -e "$(COLOUR_YELLOW)make build-test$(COLOUR_NONE) : Build the package and push to https://github.com/uktrade/dit-activity-stream/"
-	@echo -e "$(COLOUR_YELLOW)make build$(COLOUR_NONE) : Build the package and push to https://github.com/uktrade/dit-activity-stream/"
+	@echo -e "$(COLOUR_YELLOW)make tox$(COLOUR_NONE) : Run tests with tox"
+	@echo -e "$(COLOUR_YELLOW)make build-package$(COLOUR_NONE) : Build the package"
+	@echo -e "$(COLOUR_YELLOW)make push-pypi-test$(COLOUR_NONE) : Push the build package to https://test.pypi.org/project/django-hawk/"
+	@echo -e "$(COLOUR_YELLOW)make push-pypi$(COLOUR_NONE) : Push the built package to https://pypi.org/project/django-hawk/"
+
+setup:
+	poetry install --with testing,utils
 
 cleanup-code:
-	flake8 .
-	black .
-	isort .
-	mypy .
+	poetry run black .
+	poetry run isort .
+	poetry run mypy .
+	poetry run flake8 .
 
-tests:
-	tox
+tox:
+	poetry run tox
 
-build:
-	pip install --upgrade build twine
-	python -m build
+build-package:
+	poetry build
 
 push-pypi-test:
-	twine upload --repository testpypi dist/*
+	poetry publish -r test-pypi
 
 push-pypi:
-	twine upload dist/*
+	poetry publish
