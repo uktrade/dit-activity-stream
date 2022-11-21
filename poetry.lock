@@ -179,14 +179,6 @@ python-versions = ">=3.6"
 python-dateutil = ">=2.7"
 
 [[package]]
-name = "hawk-server"
-version = "0.0.12"
-description = "Utility function to perform the server-side of Hawk authentication"
-category = "main"
-optional = false
-python-versions = ">=3.6.3"
-
-[[package]]
 name = "importlib-metadata"
 version = "4.2.0"
 description = "Read metadata from Python packages"
@@ -506,7 +498,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=4.6)", "pytest-black (
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6.3,<4.0"
-content-hash = "a39554fcf8454a36602035543c3254aa8dc3f17b682a7f1187cff616234ca4b6"
+content-hash = "ce0ca8485459666ed90eacfb1778e8f3795ee87a3f926f4eb5f9e008e23e1c1b"
 
 [metadata.files]
 asgiref = [
@@ -630,10 +622,6 @@ flake8 = [
 freezegun = [
     {file = "freezegun-1.2.2-py3-none-any.whl", hash = "sha256:ea1b963b993cb9ea195adbd893a48d573fda951b0da64f60883d7e988b606c9f"},
     {file = "freezegun-1.2.2.tar.gz", hash = "sha256:cd22d1ba06941384410cd967d8a99d5ae2442f57dfafeff2fda5de8dc5c05446"},
-]
-hawk-server = [
-    {file = "hawk-server-0.0.12.tar.gz", hash = "sha256:9737819865c46a343e8fff1ec3571e4945359fa4d2e1c248c73ff8dc9f923831"},
-    {file = "hawk_server-0.0.12-py3-none-any.whl", hash = "sha256:4add4af0021e64ecb64524b264855f6de815d4acbc0aac9b9419f6a08dabe112"},
 ]
 importlib-metadata = [
     {file = "importlib_metadata-4.2.0-py3-none-any.whl", hash = "sha256:057e92c15bc8d9e8109738a48db0ccb31b4d9d5cfbee5a8670879a30be66304b"},

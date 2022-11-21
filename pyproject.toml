@@ -24,7 +24,6 @@ homepage = "https://github.com/uktrade/dit-activity-stream"
 python = ">=3.6.3,<4.0"
 Django = ">=2.2, <4.2"
 django-hawk = ">=1.1.1, <2.0"
-hawk-server = "^0.0.12"
 
 [tool.poetry.group.testing]
 optional = true
