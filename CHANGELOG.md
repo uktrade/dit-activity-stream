@@ -1,5 +1,9 @@
 # DIT Activity Stream
 
+## 0.1.0
+
+- Update to depend on Django Hawk 1.1.1 nd above
+
 ## 0.0.1
 
 - Initial release to PyPI

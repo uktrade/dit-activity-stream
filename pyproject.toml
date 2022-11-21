@@ -6,7 +6,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.poetry]
-name = "dit-activity-steam"
+name = "dit-activity-stream"
 version = "0.1.0"
 description = "DIT Activity Stream"
 authors = [
@@ -18,7 +18,6 @@ keywords = [
     "django"
 ]
 homepage = "https://github.com/uktrade/dit-activity-stream"
-
 
 [tool.poetry.dependencies]
 python = "^3.6.3"
