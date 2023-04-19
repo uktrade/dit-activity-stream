@@ -220,18 +220,18 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-hawk"
-version = "1.1.1"
+version = "1.2.0"
 description = "Authenticate Django Views with HAWK"
 category = "main"
 optional = false
-python-versions = ">=3.6.2,<4.0"
+python-versions = ">=3.7,<4.0"
 files = [
-    {file = "django_hawk-1.1.1-py3-none-any.whl", hash = "sha256:cf764f0b6bdb0c4a94ad8476533ef09c53782752dec85ed538a357c9b7c902bf"},
-    {file = "django_hawk-1.1.1.tar.gz", hash = "sha256:4f4c417d27ea3b1849181d2e04360b86a5d3966f607dbd814adf441e4a4b6315"},
+    {file = "django_hawk-1.2.0-py3-none-any.whl", hash = "sha256:df4a0e929c679af3140bb46ae6bb7b16d61e10afd2e1a8c904ef2a0ce24e36ad"},
+    {file = "django_hawk-1.2.0.tar.gz", hash = "sha256:ff48fbb7f689bd91eae2e86c2d63b5604e865f061ef85e9807eb51c18e60bebd"},
 ]
 
 [package.dependencies]
-Django = ">=2.2,<4.2"
+Django = ">=3.2,<4.3"
 mohawk = ">=1.0.0,<2.0"
 
 [[package]]
@@ -776,4 +776,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "24f24867c78204dffcaecb82fa3d257a5e8bf94902bb38cafd9ea5e54488c62f"
+content-hash = "36629ba5775699b8ac77ba267039aaf64e12cfcdd908796df226270610f35200"
