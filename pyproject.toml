@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.poetry]
 name = "dit-activity-stream"
-version = "0.1.0"
+version = "0.2.0"
 description = "DIT Activity Stream"
 authors = [
     "Cameron Lamb <live.services@digital.trade.gov.uk>"
@@ -20,15 +20,15 @@ keywords = [
 homepage = "https://github.com/uktrade/dit-activity-stream"
 
 [tool.poetry.dependencies]
-python = "^3.6.3"
-Django = ">=2.2, <4.2"
-django-hawk = "^1.1.1"
+python = "^3.7"
+Django = ">=3.2, <4.2"
+django-hawk = "^1.2.0"
 
 [tool.poetry.group.testing]
 optional = true
 
 [tool.poetry.group.testing.dependencies]
-tox = "*"
+tox = "^4"
 freezegun = "*"
 coverage = "*"
 
