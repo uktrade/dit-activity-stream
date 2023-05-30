@@ -1,5 +1,9 @@
 # DIT Activity Stream
 
+## 0.2.1
+
+- Bump Django version to 3.2.19
+
 ## 0.2.0
 
 - Drop support for python versions below 3.7

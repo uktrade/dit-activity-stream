@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.poetry]
 name = "dit-activity-stream"
-version = "0.2.0"
+version = "0.2.1"
 description = "DIT Activity Stream"
 authors = [
     "Cameron Lamb <live.services@digital.trade.gov.uk>"
