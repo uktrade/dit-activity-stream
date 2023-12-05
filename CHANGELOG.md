@@ -1,5 +1,9 @@
 # DIT Activity Stream
 
+## 0.2.2
+
+- Add support for Django 5.0
+
 ## 0.2.1
 
 - Bump Django version to 3.2.19
