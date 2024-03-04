@@ -14,7 +14,7 @@ homepage = "https://github.com/uktrade/dit-activity-stream"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-Django = ">=3.2, <4.2"
+Django = ">=3.2, <5.1"
 django-hawk = "^1.2.0"
 
 [tool.poetry.group.testing]
