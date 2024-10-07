@@ -13,7 +13,7 @@ keywords = ["django"]
 homepage = "https://github.com/uktrade/dit-activity-stream"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 Django = ">=3.2, <5.1"
 django-hawk = "^1.2.0"
 
@@ -35,3 +35,6 @@ black = "*"
 mypy = "*"
 django-stubs = "*"
 types-freezegun = "*"
+sqlparse = "^0.5.1"
+zipp = "^3.20.2"
+
