@@ -1,5 +1,11 @@
 # DIT Activity Stream
 
+## 0.2.4
+
+- Fix dependencies to allow Django 5.1
+- Add tests for Python 3.13
+- Drop support for Python 3.8 and 3.9
+
 ## 0.2.3
 
 - Fix dependencies to allow Django 4.2
